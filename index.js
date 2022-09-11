@@ -11,23 +11,28 @@ app.set('view engine', 'ejs');
 const comments = [
     {
         username: 'Monjed',
-        comment: 'lololo hahahahah'
+        comment: 'lololo hahahahah',
+        id: 1,
     },
     {
         username: 'Mohammad',
-        comment: 'lololo nice one'
+        comment: 'lololo nice one',
+        id: 2,
     },
     {
         username: 'Yousef',
-        comment: 'ok that was goood!'
+        comment: 'ok that was goood!',
+        id: 3,
     },
     {
         username: 'ali',
-        comment: 'Thank u man'
+        comment: 'Thank u man',
+        id: 4,
     },
     {
         username: 'Sami',
-        comment: 'Happy birthday!!'
+        comment: 'Happy birthday!!',
+        id: 5,
     }
 ]
 
@@ -44,6 +49,11 @@ app.post('/comments', (req, res) => {
     res.redirect('/comments');
 })
 
+app.get('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    const comment = comments.find(c => c.id == id);
+    res.render('comments/show', { comment });
+})
 
 app.listen(3000, () => {
     console.log('Listening to port 3000');
