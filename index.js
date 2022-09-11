@@ -35,14 +35,14 @@ app.get('/comments', (req, res) => {
     res.render('comments/index', { comments });
 })
 
-// app.get('/cars', (req, res) => {
-//     res.send('get request done!')
-// })
-// app.post('/cars', (req, res) => {
-//     console.log(req.body);
-//     res.send('post request done!')
-// })
+app.get('/comments/new', (req, res) => {
+    res.render('comments/new');
+})
 
+app.post('/comments', (req, res) => {
+    comments.push(req.body);
+    res.redirect('/comments');
+})
 
 
 app.listen(3000, () => {
