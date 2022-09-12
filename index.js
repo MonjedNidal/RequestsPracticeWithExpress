@@ -57,7 +57,12 @@ app.get('/comments/:id', (req, res) => {
     const comment = comments.find(c => c.id == id);
     res.render('comments/show', { comment });
 })
-
+app.patch('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    const newComment = req.body.comment;
+    const foundComment = comments.find(c => c.id === id);
+    foundComment.comment = newComment;
+})
 app.listen(3000, () => {
     console.log('Listening to port 3000');
 })
