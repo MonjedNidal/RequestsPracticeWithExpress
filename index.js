@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const { v4: uuid } = require('uuid');
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
@@ -12,27 +13,27 @@ const comments = [
     {
         username: 'Monjed',
         comment: 'lololo hahahahah',
-        id: 1,
+        id: uuid(),
     },
     {
         username: 'Mohammad',
         comment: 'lololo nice one',
-        id: 2,
+        id: uuid(),
     },
     {
         username: 'Yousef',
         comment: 'ok that was goood!',
-        id: 3,
+        id: uuid(),
     },
     {
         username: 'ali',
         comment: 'Thank u man',
-        id: 4,
+        id: uuid(),
     },
     {
         username: 'Sami',
         comment: 'Happy birthday!!',
-        id: 5,
+        id: uuid(),
     }
 ]
 
@@ -45,7 +46,9 @@ app.get('/comments/new', (req, res) => {
 })
 
 app.post('/comments', (req, res) => {
-    comments.push(req.body);
+    // comments.push(req.body);
+    const { username, comment } = req.body;
+    comments.push({ username, comment, id: uuid() });
     res.redirect('/comments');
 })
 
